@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class Screen3 extends StatelessWidget {
   const Screen3({super.key});
 
-  final minecrafts = const[
-    'Steve', 'Alex', 'Creper',
-  ];
-
-  final hollows = const[
-    'knigth', 'hornet', 'Vasija',
-  ];
+  final Map<String, String> minecraft = const {
+    'minecraft1':'assets/imgs/minecraft1.png',
+    'minecraft2':'assets/imgs/minecraft2.png',
+    'minecraft3':'assets/imgs/minecraft3.png',
+    'minecraft4':'assets/imgs/minecraft4.png',
+    'minecraft5':'assets/imgs/minecraft5.png',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -48,5 +48,26 @@ class Screen3 extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _tileDog(
+    String dogName,
+    String dogImage,
+    Color tileColor,
+    Color iconColor,
+    Color textColor
+  ){
+    final tile = ListTile(
+            leading: Image.asset(dogImage,width: 50, height: 50,),
+            title: Text(dogName),
+            subtitle: Text('Un gran juego'),
+            trailing: Icon(Icons.arrow_forward),
+            tileColor: tileColor,
+            iconColor: iconColor,
+            textColor: textColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            )
+          );
   }
 }
