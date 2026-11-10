@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Screen3 extends StatelessWidget {
   const Screen3({super.key});
 
-  final Map<String, String> perros = const {
+  final Map<String, String> minecrafts = const {
     'minecraft1':'assets/imgs/minecraft1.png',
     'minecraft2':'assets/imgs/minecraft2.png',
     'minecraft3':'assets/imgs/minecraft3.png',
@@ -11,7 +11,11 @@ class Screen3 extends StatelessWidget {
     'minecraft5':'assets/imgs/minecraft5.png',
   };
 
-  final hollows = const [];
+  final Map<String, String> hollows = const {
+    'Girasoles':'assets/imgs/Girasoles.jpg',
+    'Ocelote':'assets/imgs/Ocelote.jpg',
+    'Ocelots':'assets/imgs/Ocelots.jpg',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +23,10 @@ class Screen3 extends StatelessWidget {
       appBar: AppBar(title: Text('Ventana 3'),),
       body: ListView(
         children: [
-          ...perros.entries.map((perro){
-            return _tileDog(
-              perro.key,
-              perro.value,
+          ...minecrafts.entries.map((minecraft){
+            return _tileMine(
+              minecraft.key,
+              minecraft.value,
               Colors.blueAccent,
               Colors.amberAccent,
               Colors.white,
@@ -30,35 +34,30 @@ class Screen3 extends StatelessWidget {
           }),
 
           Divider(),
-          ...hollows.map((hollow)=>ListTile(
-            leading: Icon(Icons.campaign_rounded),
-            title: Text(hollow),
-            subtitle: Text('El mejor juego indie'),
-            trailing: Icon(Icons.arrow_forward),
-            tileColor: Color.fromARGB(159, 249, 250, 249),
-            iconColor: const Color.fromARGB(255, 76, 82, 76),
-            textColor: const Color.fromARGB(255, 35, 28, 22),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            )
-          ),
-          ),
-
+          ...hollows.entries.map((hollow){
+            return _tileHoll(
+              hollow.key,
+              hollow.value,
+              const Color.fromARGB(255, 5, 5, 5),
+              const Color.fromARGB(255, 7, 92, 211),
+              Colors.white,
+            );
+          }),
         ],
-      ),
+      )
     );
   }
 
-  Widget _tileDog(
-    String dogName,
-    String dogImage,
+  Widget _tileMine(
+    String MineName,
+    String MineImage,
     Color tileColor,
     Color iconColor,
     Color textColor
   ){
     final tile = ListTile(
-            leading: Image.asset(dogImage,width: 50, height: 50,),
-            title: Text(dogName),
+            leading: Image.asset(MineImage,width: 50, height: 50,),
+            title: Text(MineName),
             subtitle: Text('Un gran juego'),
             trailing: Icon(Icons.arrow_forward),
             tileColor: tileColor,
@@ -71,5 +70,36 @@ class Screen3 extends StatelessWidget {
           final espacio = SizedBox(height: 10);
           return Column(children: [tile, espacio],
           );
+  }
+  Widget _tileHoll(
+    String HollName,
+    String HollImage,
+    Color tileColor,
+    Color iconColor,
+    Color textColor,
+  ) {
+    final tile = ListTile(
+      leading: Icon(Icons.campaign_rounded, color: iconColor),
+
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset(HollImage, width: 60, height: 60),
+          const SizedBox(height: 4),
+          Text(
+            HollName,
+            style: TextStyle(color: textColor, fontSize: 16, fontWeight: FontWeight.normal),
+          ),
+        ],
+      ),
+      trailing: Icon(Icons.arrow_forward, color: iconColor),
+      tileColor: const Color.fromARGB(159, 11, 128, 11),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+    );
+
+    final espacio = SizedBox(height: 10);
+    return Column(children: [tile, espacio]);
   }
 }
